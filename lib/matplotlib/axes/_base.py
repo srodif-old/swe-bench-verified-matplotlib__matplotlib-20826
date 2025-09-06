@@ -1309,6 +1309,13 @@ class _AxesBase(martist.Artist):
             self.yaxis.set_visible(yaxis_visible)
             self.patch.set_visible(patch_visible)
 
+        # Restore shared axis tick label visibility for subplots
+        if hasattr(self, '_label_outer_xaxis') and hasattr(self, '_label_outer_yaxis'):
+            if self._sharex is not None:
+                self._label_outer_xaxis()
+            if self._sharey is not None:
+                self._label_outer_yaxis()
+
         self.stale = True
 
     class ArtistList(MutableSequence):
